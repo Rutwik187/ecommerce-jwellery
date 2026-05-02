@@ -1,0 +1,218 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* Glossy and Glow — All Pink Jewelry Theme */
+:root {
+  /* Brand Colors: Pink gradients from light to deep */
+  --background: #FDF4F6; /* Soft blush pink base */
+  --foreground: #4A2C3A; /* Deep plum for text */
+  --card: #FFEEF3; /* Light rose */
+  --card-foreground: #4A2C3A;
+  --popover: #FFF5F8;
+  --popover-foreground: #4A2C3A;
+  --primary: #E75480; /* Vibrant pink */
+  --primary-foreground: #FFFFFF;
+  --secondary: #FFDCE5; /* Soft pink */
+  --secondary-foreground: #4A2C3A;
+  --muted: #FFE8EE; /* Pale rose */
+  --muted-foreground: #8B5A6B;
+  --accent: #FF85A2; /* Bright coral pink */
+  --accent-foreground: #4A2C3A;
+  --destructive: #D64545;
+  --destructive-foreground: #FFFFFF;
+  --border: #FFCAD8;
+  --input: #FFE8EE;
+  --ring: #E75480;
+  --chart-1: #E75480;
+  --chart-2: #FF85A2;
+  --chart-3: #FFDCE5;
+  --chart-4: #FFB6C8;
+  --chart-5: #8B5A6B;
+  --radius: 0.75rem;
+  --sidebar: #FFEEF3;
+  --sidebar-foreground: #4A2C3A;
+  --sidebar-primary: #E75480;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #FFDCE5;
+  --sidebar-accent-foreground: #4A2C3A;
+  --sidebar-border: #FFCAD8;
+  --sidebar-ring: #E75480;
+}
+
+.dark {
+  --background: #3D2433;
+  --foreground: #FFE8EE;
+  --card: #4A2C3A;
+  --card-foreground: #FFE8EE;
+  --popover: #3D2433;
+  --popover-foreground: #FFE8EE;
+  --primary: #FF85A2;
+  --primary-foreground: #3D2433;
+  --secondary: #5A3D4A;
+  --secondary-foreground: #FFE8EE;
+  --muted: #4A2C3A;
+  --muted-foreground: #FFCAD8;
+  --accent: #5A3D4A;
+  --accent-foreground: #FFE8EE;
+  --destructive: #D64545;
+  --destructive-foreground: #FFE8EE;
+  --border: #5A3D4A;
+  --input: #4A2C3A;
+  --ring: #FF85A2;
+  --chart-1: #FF85A2;
+  --chart-2: #E75480;
+  --chart-3: #8B5A6B;
+  --chart-4: #FFCAD8;
+  --chart-5: #FFDCE5;
+  --sidebar: #4A2C3A;
+  --sidebar-foreground: #FFE8EE;
+  --sidebar-primary: #FF85A2;
+  --sidebar-primary-foreground: #3D2433;
+  --sidebar-accent: #5A3D4A;
+  --sidebar-accent-foreground: #FFE8EE;
+  --sidebar-border: #5A3D4A;
+  --sidebar-ring: #FF85A2;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), 'Inter Fallback', sans-serif;
+  --font-serif: var(--font-playfair), 'Playfair Display Fallback', 'Times New Roman', serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 8px);
+  --radius-2xl: calc(var(--radius) + 16px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  /* Premium serif headings - tighter tracking, refined weights */
+  .font-serif {
+    letter-spacing: -0.015em;
+    font-feature-settings: "lnum", "kern";
+  }
+}
+
+/* Soft pink-tinted shadow utility */
+.glossy-shadow {
+  box-shadow: rgba(231, 84, 128, 0.06) 0px 0px 0px 1px, rgba(231, 84, 128, 0.06) 0px 1px 1px -0.5px, rgba(231, 84, 128, 0.06) 0px 3px 3px -1.5px, rgba(231, 84, 128, 0.06) 0px 6px 6px -3px, rgba(231, 84, 128, 0.06) 0px 12px 12px -6px, rgba(231, 84, 128, 0.08) 0px 24px 24px -12px;
+}
+
+.glossy-shadow-soft {
+  box-shadow: 0 2px 4px rgba(231, 84, 128, 0.06), 0 8px 24px rgba(231, 84, 128, 0.1);
+}
+
+/* Smooth transitions */
+.glossy-transition {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Keep old class for compatibility */
+.lumiere-transition {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lumiere-shadow-soft {
+  box-shadow: 0 2px 4px rgba(231, 84, 128, 0.06), 0 8px 24px rgba(231, 84, 128, 0.1);
+}
+
+/* Blur in animation */
+@keyframes blur-in {
+  0% {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+.animate-blur-in {
+  animation: blur-in 0.9s ease-out;
+}
+
+/* Scale fade in animation */
+@keyframes scale-fade-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scale-fade-in {
+  animation: scale-fade-in 0.7s ease-out;
+}
+
+/* Subtle float animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Shimmer effect for accents */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Glossy pink gradient background */
+.glossy-gradient {
+  background: linear-gradient(135deg, #FFEEF3 0%, #FDF4F6 50%, #FFDCE5 100%);
+}
