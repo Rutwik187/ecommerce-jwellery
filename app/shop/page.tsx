@@ -2,17 +2,14 @@ import { Suspense } from "react"
 import { Header } from "@/components/boty/header"
 import { Footer } from "@/components/boty/footer"
 import { ShopClient } from "./shop-client"
-import { sanityFetch } from "@/sanity/lib/live"
+import { client } from "@/sanity/lib/client"
 import { ALL_PRODUCTS_QUERY, CATEGORIES_QUERY } from "@/sanity/lib/queries"
 
 export default async function ShopPage() {
-  const [productsResponse, categoriesResponse] = await Promise.all([
-    sanityFetch({ query: ALL_PRODUCTS_QUERY }),
-    sanityFetch({ query: CATEGORIES_QUERY })
+  const [products, categories] = await Promise.all([
+    client.fetch(ALL_PRODUCTS_QUERY),
+    client.fetch(CATEGORIES_QUERY)
   ])
-
-  const products = productsResponse.data || []
-  const categories = categoriesResponse.data || []
 
   return (
     <main className="min-h-screen bg-background">

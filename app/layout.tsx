@@ -3,7 +3,6 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { CartProvider } from '@/components/boty/cart-context'
-import { SanityLive } from '@/sanity/lib/live'
 import './globals.css'
 
 const inter = Inter({
@@ -44,7 +43,6 @@ export default function RootLayout({
           {children}
         </CartProvider>
         <Analytics />
-        <SanityLive />
       </body>
     </html>
   )
