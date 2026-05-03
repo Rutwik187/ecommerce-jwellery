@@ -7,23 +7,18 @@ import { Gem, Sparkles, HeartHandshake, Leaf } from "lucide-react"
 const features = [
   {
     icon: Gem,
-    title: "925 Sterling Silver",
-    description: "Investment pieces, never plated"
+    title: "Anti-Tarnish Coating",
+    description: "Extra layer of protection"
   },
   {
     icon: Sparkles,
-    title: "Hand-Set Stones",
-    description: "Crystals, pearls & rose quartz"
+    title: "Water & Sweat Proof",
+    description: "Designed for daily wear"
   },
   {
     icon: HeartHandshake,
-    title: "Lifetime Care",
-    description: "Free polishing & re-sizing"
-  },
-  {
-    icon: Leaf,
-    title: "Ethically Sourced",
-    description: "Crafted with intention"
+    title: "Long-Lasting Shine",
+    description: "Jewellery that stays glossy"
   }
 ]
 
@@ -188,7 +183,7 @@ export function FeatureSection() {
               }`}
               style={headerVisible ? { animationDelay: '0.2s', animationFillMode: 'forwards' } : {}}
             >
-              Why Glossy & Glow
+              Crafted for everyday wear. Built to last.
             </span>
             <h2
               className={`font-serif font-light text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-[1.05] text-foreground mb-5 sm:mb-7 text-balance ${
@@ -196,8 +191,8 @@ export function FeatureSection() {
               }`}
               style={headerVisible ? { animationDelay: '0.4s', animationFillMode: 'forwards' } : {}}
             >
-              Quietly <span className="text-primary">luminous,</span><br />
-              made to last.
+              Glow differently.<br />
+              Jewellery that stays <span className="text-primary">glossy,</span> no matter what.
             </h2>
             <p
               className={`text-sm sm:text-base text-muted-foreground leading-relaxed mb-8 sm:mb-12 max-w-md ${
@@ -205,8 +200,8 @@ export function FeatureSection() {
               }`}
               style={headerVisible ? { animationDelay: '0.6s', animationFillMode: 'forwards' } : {}}
             >
-              We design heirloom-quality jewelry without the heirloom price. Sterling silver,
-              hand-finished settings, and stones we&apos;d wear ourselves.
+              Anti-tarnish • Waterproof • Skin-friendly<br />
+              Made to shine with you, every day.
             </p>
 
             {/* Feature Cards */}

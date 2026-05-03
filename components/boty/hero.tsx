@@ -30,21 +30,21 @@ export function Hero() {
               className="text-[10px] sm:text-[11px] tracking-[0.3em] sm:tracking-[0.4em] uppercase mb-6 sm:mb-8 block text-primary animate-blur-in opacity-0"
               style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}
             >
-              Elegant Jewelry · Est. 2024
+              ANTI-TARNISH JEWELLERY · MADE TO LAST
             </span>
 
             <h1 className="font-serif font-light text-foreground leading-[0.95] mb-6 sm:mb-8 text-balance">
               <span
-                className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal text-primary animate-blur-in opacity-0"
+                className="block text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-6xl font-normal text-primary animate-blur-in opacity-0"
                 style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}
               >
-                Shine
+                Stay golden.
               </span>
               <span
-                className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl animate-blur-in opacity-0"
+                className="block text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-6xl animate-blur-in opacity-0"
                 style={{ animationDelay: '0.55s', animationFillMode: 'forwards' }}
               >
-                with elegance.
+                No fading, no dullness.
               </span>
             </h1>
 
@@ -52,7 +52,7 @@ export function Hero() {
               className="text-sm sm:text-base md:text-lg leading-relaxed mb-8 sm:mb-12 max-w-md mx-auto lg:mx-0 text-muted-foreground animate-blur-in opacity-0"
               style={{ animationDelay: '0.75s', animationFillMode: 'forwards' }}
             >
-              Delicately crafted rings, pendants and waist chains—designed to make every moment sparkle.
+              Waterproof, sweat-proof, and tarnish-resistant jewellery—designed to shine every day, effortlessly.
             </p>
 
             <div
@@ -63,7 +63,7 @@ export function Hero() {
                 href="/shop"
                 className="group inline-flex items-center justify-center gap-3 bg-primary text-primary-foreground px-7 sm:px-9 py-3.5 sm:py-4 rounded-full text-[10px] sm:text-xs tracking-[0.2em] uppercase glossy-transition hover:bg-foreground w-full sm:w-auto"
               >
-                Shop the Collection
+                SHOP GLOSSY GLOW
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 glossy-transition" />
               </Link>
               <Link

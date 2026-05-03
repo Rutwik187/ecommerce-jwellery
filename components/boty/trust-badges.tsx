@@ -6,18 +6,18 @@ import { Sparkles, Gem, HeartHandshake, Truck } from "lucide-react"
 const badges = [
   {
     icon: Gem,
-    title: "925 Sterling Silver",
-    description: "Hypoallergenic & lasting"
+    title: "Anti-Tarnish",
+    description: "Extra layer of protection"
   },
   {
     icon: Sparkles,
-    title: "Hand-Finished",
-    description: "Crafted by artisans"
+    title: "Water & Sweat Proof",
+    description: "Designed for daily wear"
   },
   {
     icon: HeartHandshake,
-    title: "Lifetime Care",
-    description: "Polishing & repairs"
+    title: "Skin-Friendly",
+    description: "Hypoallergenic & safe"
   },
   {
     icon: Truck,
