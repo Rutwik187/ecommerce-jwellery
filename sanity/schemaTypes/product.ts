@@ -49,6 +49,19 @@ export const productType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'images',
+      title: 'Secondary Images',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'image',
+          options: {
+            hotspot: true,
+          },
+        }),
+      ],
+    }),
+    defineField({
       name: 'categories',
       type: 'array',
       of: [defineArrayMember({ type: 'reference', to: { type: 'category' } })],

@@ -48,6 +48,7 @@ export const PRODUCT_BY_SLUG_QUERY = defineQuery(`
     price,
     originalPrice,
     mainImage,
+    images,
     badge,
     details,
     howToWear,

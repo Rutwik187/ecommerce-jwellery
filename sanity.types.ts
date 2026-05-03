@@ -48,6 +48,14 @@ export type Product = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+  images?: Array<{
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
   categories?: Array<
     {
       _key: string;
@@ -260,7 +268,7 @@ export type PRODUCTS_BY_CATEGORY_QUERY_RESULT = Array<{
 
 // Source: sanity/lib/queries.ts
 // Variable: PRODUCT_BY_SLUG_QUERY
-// Query: *[_type == "product" && slug.current == $slug][0] {    _id,    name,    "slug": slug.current,    tagline,    description,    price,    originalPrice,    mainImage,    badge,    details,    howToWear,    materials,    "categories": categories[]->{      name,      "slug": slug.current    }  }
+// Query: *[_type == "product" && slug.current == $slug][0] {    _id,    name,    "slug": slug.current,    tagline,    description,    price,    originalPrice,    mainImage,    images,    badge,    details,    howToWear,    materials,    "categories": categories[]->{      name,      "slug": slug.current    }  }
 export type PRODUCT_BY_SLUG_QUERY_RESULT = {
   _id: string;
   name: string | null;
@@ -276,6 +284,14 @@ export type PRODUCT_BY_SLUG_QUERY_RESULT = {
     crop?: SanityImageCrop;
     _type: "image";
   } | null;
+  images: Array<{
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }> | null;
   badge: "Bestseller" | "Limited" | "New" | "Sale" | null;
   details: string | null;
   howToWear: string | null;
@@ -293,6 +309,6 @@ declare module "@sanity/client" {
     '\n  *[_type == "category"] | order(name asc) {\n    _id,\n    name,\n    "slug": slug.current\n  }\n': CATEGORIES_QUERY_RESULT;
     '\n  *[_type == "product"] | order(_createdAt desc) {\n    _id,\n    name,\n    "slug": slug.current,\n    tagline,\n    description,\n    price,\n    originalPrice,\n    mainImage,\n    badge,\n    "category": categories[0]->slug.current\n  }\n': ALL_PRODUCTS_QUERY_RESULT;
     '\n  *[_type == "product" && references(*[_type == "category" && slug.current == $category]._id)] | order(_createdAt desc) {\n    _id,\n    name,\n    "slug": slug.current,\n    tagline,\n    description,\n    price,\n    originalPrice,\n    mainImage,\n    badge,\n    "category": categories[0]->slug.current\n  }\n': PRODUCTS_BY_CATEGORY_QUERY_RESULT;
-    '\n  *[_type == "product" && slug.current == $slug][0] {\n    _id,\n    name,\n    "slug": slug.current,\n    tagline,\n    description,\n    price,\n    originalPrice,\n    mainImage,\n    badge,\n    details,\n    howToWear,\n    materials,\n    "categories": categories[]->{\n      name,\n      "slug": slug.current\n    }\n  }\n': PRODUCT_BY_SLUG_QUERY_RESULT;
+    '\n  *[_type == "product" && slug.current == $slug][0] {\n    _id,\n    name,\n    "slug": slug.current,\n    tagline,\n    description,\n    price,\n    originalPrice,\n    mainImage,\n    images,\n    badge,\n    details,\n    howToWear,\n    materials,\n    "categories": categories[]->{\n      name,\n      "slug": slug.current\n    }\n  }\n': PRODUCT_BY_SLUG_QUERY_RESULT;
   }
 }

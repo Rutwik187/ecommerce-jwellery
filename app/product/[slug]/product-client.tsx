@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ChevronLeft, Minus, Plus, ChevronDown, Gem, HeartHandshake, Award, Truck, Star, Check } from "lucide-react"
+import { ChevronLeft, ChevronRight, Minus, Plus, ChevronDown, Gem, HeartHandshake, Award, Truck, Star, Check } from "lucide-react"
 import { useCart } from "@/components/boty/cart-context"
 import { urlFor } from "@/sanity/lib/image"
 
@@ -20,13 +20,24 @@ export function ProductClient({ product }: { product: any }) {
   const [quantity, setQuantity] = useState(1)
   const [openAccordion, setOpenAccordion] = useState<AccordionSection | null>("details")
   const [isAdded, setIsAdded] = useState(false)
+  const [activeImageIndex, setActiveImageIndex] = useState(0)
   const { addItem, setIsOpen } = useCart()
 
   const toggleAccordion = (section: AccordionSection) => {
     setOpenAccordion(openAccordion === section ? null : section)
   }
 
-  const imageUrl = product.mainImage ? urlFor(product.mainImage).width(1200).url() : "/placeholder.svg"
+  const allImages = [product.mainImage, ...(product.images || [])]
+  const currentImage = allImages[activeImageIndex]
+  const imageUrl = currentImage ? urlFor(currentImage).width(1200).url() : "/placeholder.svg"
+
+  const nextImage = () => {
+    setActiveImageIndex((prev) => (prev + 1) % allImages.length)
+  }
+
+  const prevImage = () => {
+    setActiveImageIndex((prev) => (prev - 1 + allImages.length) % allImages.length)
+  }
 
   const handleAddToCart = () => {
     addItem({
@@ -71,9 +82,9 @@ export function ProductClient({ product }: { product: any }) {
         </Link>
 
         <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 xl:gap-20">
-          {/* Product Image */}
-          <div className="lg:sticky lg:top-32 lg:self-start">
-            <div className="relative aspect-[4/5] rounded-xl sm:rounded-2xl overflow-hidden bg-card glossy-shadow-soft border border-border/40">
+          {/* Product Gallery */}
+          <div className="lg:sticky lg:top-32 lg:self-start space-y-4">
+            <div className="relative aspect-[4/5] rounded-xl sm:rounded-2xl overflow-hidden bg-card glossy-shadow-soft border border-border/40 group/gallery">
               <Image
                 src={imageUrl}
                 alt={product.name}
@@ -82,7 +93,48 @@ export function ProductClient({ product }: { product: any }) {
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
+
+              {/* Image Controls */}
+              {allImages.length > 1 && (
+                <>
+                  <button
+                    onClick={(e) => { e.preventDefault(); prevImage(); }}
+                    className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-card/60 backdrop-blur-md border border-border/50 flex items-center justify-center text-foreground/70 hover:text-primary hover:bg-card glossy-transition opacity-0 group-hover/gallery:opacity-100"
+                    aria-label="Previous image"
+                  >
+                    <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={1.5} />
+                  </button>
+                  <button
+                    onClick={(e) => { e.preventDefault(); nextImage(); }}
+                    className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-card/60 backdrop-blur-md border border-border/50 flex items-center justify-center text-foreground/70 hover:text-primary hover:bg-card glossy-transition opacity-0 group-hover/gallery:opacity-100"
+                    aria-label="Next image"
+                  >
+                    <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={1.5} />
+                  </button>
+                </>
+              )}
             </div>
+
+            {/* Thumbnails */}
+            {allImages.length > 1 && (
+              <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                {allImages.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setActiveImageIndex(index)}
+                    className={`relative flex-shrink-0 w-20 h-24 sm:w-24 sm:h-30 rounded-lg overflow-hidden border-2 glossy-transition ${activeImageIndex === index ? "border-primary" : "border-transparent opacity-60 hover:opacity-100"
+                      }`}
+                  >
+                    <Image
+                      src={urlFor(image).width(200).url()}
+                      alt={`${product.name} view ${index + 1}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Product Info */}
@@ -157,11 +209,10 @@ export function ProductClient({ product }: { product: any }) {
               <button
                 type="button"
                 onClick={handleAddToCart}
-                className={`flex-1 inline-flex items-center justify-center gap-2 px-6 sm:px-9 py-3.5 sm:py-4 rounded-full text-[10px] sm:text-[11px] tracking-[0.2em] uppercase glossy-transition ${
-                  isAdded
+                className={`flex-1 inline-flex items-center justify-center gap-2 px-6 sm:px-9 py-3.5 sm:py-4 rounded-full text-[10px] sm:text-[11px] tracking-[0.2em] uppercase glossy-transition ${isAdded
                     ? "bg-accent text-accent-foreground"
                     : "bg-primary text-primary-foreground hover:bg-foreground"
-                }`}
+                  }`}
               >
                 {isAdded ? (
                   <>
@@ -205,16 +256,14 @@ export function ProductClient({ product }: { product: any }) {
                   >
                     <span className="text-[10px] sm:text-[11px] tracking-[0.2em] uppercase text-foreground">{item.title}</span>
                     <ChevronDown
-                      className={`w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground glossy-transition ${
-                        openAccordion === item.key ? "rotate-180" : ""
-                      }`}
+                      className={`w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground glossy-transition ${openAccordion === item.key ? "rotate-180" : ""
+                        }`}
                       strokeWidth={1.5}
                     />
                   </button>
                   <div
-                    className={`overflow-hidden glossy-transition ${
-                      openAccordion === item.key ? "max-h-96 pb-4 sm:pb-6" : "max-h-0"
-                    }`}
+                    className={`overflow-hidden glossy-transition ${openAccordion === item.key ? "max-h-96 pb-4 sm:pb-6" : "max-h-0"
+                      }`}
                   >
                     <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
                       {item.content}
