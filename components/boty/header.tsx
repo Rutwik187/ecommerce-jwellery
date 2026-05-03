@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Menu, X, ShoppingBag, Search, User } from "lucide-react"
+import Image from "next/image"
 import { CartDrawer } from "./cart-drawer"
 import { useCart } from "./cart-context"
 
@@ -63,10 +64,15 @@ export function Header({ categories = [] }: { categories?: any[] }) {
           </div>
 
           {/* Logo */}
-          <Link href="/" className="absolute left-1/2 -translate-x-1/2 group">
-            <h1 className="font-serif font-medium text-xl sm:text-2xl md:text-3xl tracking-tight text-foreground group-hover:text-primary glossy-transition whitespace-nowrap">
-              Glossy & Glow
-            </h1>
+          <Link href="/" className="absolute left-1/2 -translate-x-1/2 group py-1">
+            <Image
+              src="/logo.png"
+              alt="Glossy & Glow"
+              width={180}
+              height={45}
+              className="h-8 sm:h-10 md:h-12 w-auto object-contain glossy-transition group-hover:scale-105"
+              priority
+            />
           </Link>
 
           {/* Right Actions */}

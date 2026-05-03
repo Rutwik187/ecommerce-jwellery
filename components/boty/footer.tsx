@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { Instagram, Facebook, Twitter } from "lucide-react"
+import Image from "next/image"
 
 const footerLinks = {
   shop: [
@@ -48,7 +49,15 @@ export function Footer({ categories = [] }: { categories?: any[] }) {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 mb-12 sm:mb-16 md:mb-20">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <h2 className="font-serif font-medium text-2xl sm:text-3xl text-foreground mb-3 sm:mb-4 tracking-tight">Glossy & Glow</h2>
+            <Link href="/" className="inline-block mb-6 group">
+              <Image
+                src="/logo.png"
+                alt="Glossy & Glow"
+                width={240}
+                height={60}
+                className="h-12 sm:h-16 md:h-20 w-auto object-contain glossy-transition group-hover:opacity-80"
+              />
+            </Link>
             <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-4 sm:mb-6 max-w-xs">
               Elegant jewelry, designed to make you shine. For every story you wear.
             </p>
