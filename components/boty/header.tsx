@@ -6,10 +6,18 @@ import { Menu, X, ShoppingBag, Search, User } from "lucide-react"
 import { CartDrawer } from "./cart-drawer"
 import { useCart } from "./cart-context"
 
-export function Header() {
+export function Header({ categories = [] }: { categories?: any[] }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const { setIsOpen, itemCount } = useCart()
+
+  const navCategories = categories.length > 0 
+    ? categories.slice(0, 4) 
+    : [
+        { name: 'Rings', slug: 'rings' },
+        { name: 'Pendants', slug: 'pendants' },
+        { name: 'Chains', slug: 'waist-chains' }
+      ]
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20)
@@ -43,15 +51,15 @@ export function Header() {
             <Link href="/shop" className="text-[10px] xl:text-[11px] tracking-[0.2em] uppercase text-foreground/70 hover:text-primary glossy-transition">
               Shop
             </Link>
-            <Link href="/shop?category=rings" className="text-[10px] xl:text-[11px] tracking-[0.2em] uppercase text-foreground/70 hover:text-primary glossy-transition">
-              Rings
-            </Link>
-            <Link href="/shop?category=pendants" className="text-[10px] xl:text-[11px] tracking-[0.2em] uppercase text-foreground/70 hover:text-primary glossy-transition">
-              Pendants
-            </Link>
-            <Link href="/shop?category=waist-chains" className="text-[10px] xl:text-[11px] tracking-[0.2em] uppercase text-foreground/70 hover:text-primary glossy-transition">
-              Chains
-            </Link>
+            {navCategories.map((cat) => (
+              <Link 
+                key={cat.slug} 
+                href={`/shop?category=${cat.slug}`} 
+                className="text-[10px] xl:text-[11px] tracking-[0.2em] uppercase text-foreground/70 hover:text-primary glossy-transition"
+              >
+                {cat.name}
+              </Link>
+            ))}
           </div>
 
           {/* Logo */}
@@ -109,41 +117,16 @@ export function Header() {
             >
               Shop All
             </Link>
-            <Link 
-              href="/shop?category=rings" 
-              className="text-sm tracking-wide text-foreground/70 hover:text-primary glossy-transition py-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Rings
-            </Link>
-            <Link 
-              href="/shop?category=pendants" 
-              className="text-sm tracking-wide text-foreground/70 hover:text-primary glossy-transition py-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Pendants
-            </Link>
-            <Link 
-              href="/shop?category=waist-chains" 
-              className="text-sm tracking-wide text-foreground/70 hover:text-primary glossy-transition py-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Waist Chains
-            </Link>
-            <Link 
-              href="/shop?category=bracelets" 
-              className="text-sm tracking-wide text-foreground/70 hover:text-primary glossy-transition py-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Bracelets
-            </Link>
-            <Link 
-              href="/shop?category=earrings" 
-              className="text-sm tracking-wide text-foreground/70 hover:text-primary glossy-transition py-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Earrings
-            </Link>
+            {categories.map((cat) => (
+              <Link 
+                key={cat.slug} 
+                href={`/shop?category=${cat.slug}`} 
+                className="text-sm tracking-wide text-foreground/70 hover:text-primary glossy-transition py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {cat.name}
+              </Link>
+            ))}
           </div>
         </div>
       </nav>

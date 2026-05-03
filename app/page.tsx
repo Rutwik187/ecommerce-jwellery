@@ -7,19 +7,29 @@ import { Testimonials } from "@/components/boty/testimonials"
 import { CTABanner } from "@/components/boty/cta-banner"
 import { Newsletter } from "@/components/boty/newsletter"
 import { Footer } from "@/components/boty/footer"
+import { sanityFetch } from "@/sanity/lib/live"
+import { ALL_PRODUCTS_QUERY, CATEGORIES_QUERY } from "@/sanity/lib/queries"
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [productsResponse, categoriesResponse] = await Promise.all([
+    sanityFetch({ query: ALL_PRODUCTS_QUERY }),
+    sanityFetch({ query: CATEGORIES_QUERY })
+  ])
+
+  const products = productsResponse.data || []
+  const categories = categoriesResponse.data || []
+
   return (
     <main>
-      <Header />
+      <Header categories={categories} />
       <Hero />
       <TrustBadges />
-      <ProductGrid />
+      <ProductGrid initialProducts={products} categories={categories} />
       <FeatureSection />
       <Testimonials />
       <CTABanner />
       <Newsletter />
-      <Footer />
+      <Footer categories={categories} />
     </main>
   )
 }

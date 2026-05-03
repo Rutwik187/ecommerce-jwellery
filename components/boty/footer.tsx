@@ -27,10 +27,17 @@ const footerLinks = {
   ]
 }
 
-export function Footer() {
+export function Footer({ categories = [] }: { categories?: any[] }) {
+  const shopLinks = categories.length > 0 
+    ? [
+        { name: "All Jewelry", href: "/shop" },
+        ...categories.map(cat => ({ name: cat.name, href: `/shop?category=${cat.slug}` }))
+      ]
+    : footerLinks.shop
+
   return (
     <footer className="bg-card pt-16 sm:pt-20 md:pt-24 pb-8 sm:pb-12 relative overflow-hidden border-t border-border/60">
-      {/* Giant Background Wordmark */}
+      {/* ... existing Giant Background Wordmark ... */}
       <div className="absolute -bottom-4 sm:-bottom-6 md:-bottom-8 left-1/2 -translate-x-1/2 pointer-events-none select-none z-0">
         <span className="font-serif text-[100px] sm:text-[160px] md:text-[240px] lg:text-[320px] xl:text-[400px] font-light text-secondary whitespace-nowrap leading-none tracking-tight">
           Glossy
@@ -67,7 +74,7 @@ export function Footer() {
           <div>
             <h3 className="text-[10px] sm:text-[11px] tracking-[0.3em] uppercase text-foreground mb-4 sm:mb-5">Shop</h3>
             <ul className="space-y-2 sm:space-y-3">
-              {footerLinks.shop.map((link) => (
+              {shopLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
