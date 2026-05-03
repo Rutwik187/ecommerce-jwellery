@@ -17,7 +17,7 @@ import { useCart } from "./cart-context"
 export function CartDrawer() {
   const { items, removeItem, updateQuantity, isOpen, setIsOpen, itemCount, subtotal } = useCart()
 
-  const shipping = 0
+  const shipping: number = 0
   const total = subtotal + shipping
 
   return (

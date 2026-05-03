@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Menu, X, ShoppingBag, Search, User } from "lucide-react"
-import Image from "next/image"
 import { CartDrawer } from "./cart-drawer"
 import { useCart } from "./cart-context"
 
@@ -12,13 +11,13 @@ export function Header({ categories = [] }: { categories?: any[] }) {
   const [isScrolled, setIsScrolled] = useState(false)
   const { setIsOpen, itemCount } = useCart()
 
-  const navCategories = categories.length > 0 
-    ? categories.slice(0, 4) 
+  const navCategories = categories.length > 0
+    ? categories.slice(0, 4)
     : [
-        { name: 'Rings', slug: 'rings' },
-        { name: 'Pendants', slug: 'pendants' },
-        { name: 'Chains', slug: 'waist-chains' }
-      ]
+      { name: 'Rings', slug: 'rings' },
+      { name: 'Pendants', slug: 'pendants' },
+      { name: 'Chains', slug: 'waist-chains' }
+    ]
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20)
@@ -30,11 +29,10 @@ export function Header({ categories = [] }: { categories?: any[] }) {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-4 md:px-6 pt-3 sm:pt-4 md:pt-5">
       <nav
-        className={`max-w-7xl mx-auto px-4 sm:px-5 lg:px-8 rounded-2xl sm:rounded-full glossy-transition animate-scale-fade-in ${
-          isScrolled
+        className={`max-w-7xl mx-auto px-4 sm:px-5 lg:px-8 rounded-2xl sm:rounded-full glossy-transition animate-scale-fade-in ${isScrolled
             ? "bg-card/90 backdrop-blur-xl border border-border shadow-[0_8px_32px_rgba(231,84,128,0.08)]"
             : "bg-card/60 backdrop-blur-md border border-border/50"
-        }`}
+          }`}
       >
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Mobile menu button */}
@@ -53,9 +51,9 @@ export function Header({ categories = [] }: { categories?: any[] }) {
               Shop
             </Link>
             {navCategories.map((cat) => (
-              <Link 
-                key={cat.slug} 
-                href={`/shop?category=${cat.slug}`} 
+              <Link
+                key={cat.slug}
+                href={`/shop?category=${cat.slug}`}
                 className="text-[10px] xl:text-[11px] tracking-[0.2em] uppercase text-foreground/70 hover:text-primary glossy-transition"
               >
                 {cat.name}
@@ -64,15 +62,10 @@ export function Header({ categories = [] }: { categories?: any[] }) {
           </div>
 
           {/* Logo */}
-          <Link href="/" className="absolute left-1/2 -translate-x-1/2 group py-1">
-            <Image
-              src="/logo.png"
-              alt="Glossy & Glow"
-              width={180}
-              height={45}
-              className="h-8 sm:h-10 md:h-12 w-auto object-contain glossy-transition group-hover:scale-105"
-              priority
-            />
+          <Link href="/" className="absolute left-1/2 -translate-x-1/2 group">
+            <h1 className="font-serif font-medium text-xl sm:text-2xl md:text-3xl tracking-tight text-foreground group-hover:text-primary glossy-transition whitespace-nowrap">
+              Glossy & Glow
+            </h1>
           </Link>
 
           {/* Right Actions */}
@@ -111,22 +104,21 @@ export function Header({ categories = [] }: { categories?: any[] }) {
 
         {/* Mobile Navigation */}
         <div
-          className={`lg:hidden overflow-hidden glossy-transition ${
-            isMenuOpen ? "max-h-80 pb-6" : "max-h-0"
-          }`}
+          className={`lg:hidden overflow-hidden glossy-transition ${isMenuOpen ? "max-h-80 pb-6" : "max-h-0"
+            }`}
         >
           <div className="flex flex-col gap-3 pt-4 border-t border-border/50">
-            <Link 
-              href="/shop" 
+            <Link
+              href="/shop"
               className="text-sm tracking-wide text-foreground/70 hover:text-primary glossy-transition py-2"
               onClick={() => setIsMenuOpen(false)}
             >
               Shop All
             </Link>
             {categories.map((cat) => (
-              <Link 
-                key={cat.slug} 
-                href={`/shop?category=${cat.slug}`} 
+              <Link
+                key={cat.slug}
+                href={`/shop?category=${cat.slug}`}
                 className="text-sm tracking-wide text-foreground/70 hover:text-primary glossy-transition py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
