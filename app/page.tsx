@@ -7,13 +7,13 @@ import { Testimonials } from "@/components/boty/testimonials"
 import { CTABanner } from "@/components/boty/cta-banner"
 import { Newsletter } from "@/components/boty/newsletter"
 import { Footer } from "@/components/boty/footer"
-import { client } from "@/sanity/lib/client"
+import { sanityFetch } from "@/sanity/lib/client"
 import { ALL_PRODUCTS_QUERY, CATEGORIES_QUERY } from "@/sanity/lib/queries"
 
 export default async function HomePage() {
   const [products, categories] = await Promise.all([
-    client.fetch(ALL_PRODUCTS_QUERY),
-    client.fetch(CATEGORIES_QUERY)
+    sanityFetch({ query: ALL_PRODUCTS_QUERY }),
+    sanityFetch({ query: CATEGORIES_QUERY })
   ])
 
   return (
